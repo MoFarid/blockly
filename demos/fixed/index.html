@@ -1,49 +1,204 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Blockly Demo: Fixed Blockly</title>
-  <script src="../../blockly_compressed.js"></script>
-  <script src="../../blocks_compressed.js"></script>
-  <script src="../../msg/js/en.js"></script>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-  </style>
-</head>
-<body>
-  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-    <a href="../index.html">Demos</a> &gt; Fixed Blockly</h1>
+  <head>
+    <meta charset="utf-8" />
+    <title>Blockly Demo: Fixed Blockly</title>
+    <script src="../../blockly_compressed.js"></script>
+    <script src="../../blocks_compressed.js"></script>
+    <script src="../../javascript_compressed.js"></script>
+    <script src="../../msg/js/en.js"></script>
 
-  <p>This is a simple demo of injecting Blockly into a fixed-sized 'div' element.</p>
+    <script src="../../custom/game_rule.js"></script>
+    <script src="../../custom/game_action_move.js"></script>
+    <script src="../../custom/game_trigger_click.js"></script>
+    <script src="../../custom/game_trigger_keypress.js"></script>
 
-  <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure-blockly/web/fixed-size">injecting fixed-sized Blockly</a>&hellip;</p>
+    <script type="text/javascript">
+      var imgObj = null;
+      var rules
+      var triggered = {}
 
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+      function init() {
+        imgObj = document.getElementById("panda");
+        imgObj.style.position = "relative";
+        imgObj.style.left = "0px";
+        imgObj.style.top = "0px";
+        imgObj.addEventListener("click", function(e) {
+          const TRIGGER = 'CLICKED'
+          triggered[TRIGGER] = true
+          runRules()
+        });
+        document.onkeypress = function(e) {
+          e = e || window.event;
+          const TRIGGER = e.key + '_PRESSED'
+          triggered[TRIGGER] = true
+          runRules()
+        };
+        demoWorkspace.addChangeListener(updateRules);
+      }
 
-  <xml id="toolbox" style="display: none">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="controls_repeat_ext"></block>
-    <block type="math_number">
-      <field name="NUM">123</field>
-    </block>
-    <block type="math_arithmetic"></block>
-    <block type="text"></block>
-    <block type="text_print"></block>
-  </xml>
+      function moveRight() {
+        imgObj.style.left = parseInt(imgObj.style.left) + 10 + "px";
+      }
+      function moveLeft() {
+        imgObj.style.left = parseInt(imgObj.style.left) - 10 + "px";
+      }
+      function moveUp() {
+        imgObj.style.top = parseInt(imgObj.style.top) - 10 + "px";
+      }
+      function moveDown() {
+        imgObj.style.top = parseInt(imgObj.style.top) + 10 + "px";
+      }
 
-  <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: '../../media/',
-         toolbox: document.getElementById('toolbox')});
-  </script>
+      function updateRules() {
+        const code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+        console.log("// Code Starts \n" + code + "// Code ends")
+        rules = code.split("*&")
+        rules.splice(-1, 1)
 
-</body>
+        for(let i = 0; i<rules.length; i++){
+          rules[i] = new Function(rules[i])
+        }
+      }
+
+      function runRules() {
+       rules.forEach(element => {
+          element()
+        })
+      }
+
+      window.onload = init;
+    </script>
+
+    <style>
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
+      }
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+
+      .centeredLeft {
+        margin-left: 1000px;
+        margin-right: 0px;
+        margin-bottom: 50px;
+        margin-top: 50px;
+      }
+
+      .split {
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      /* Control the left side */
+      .left {
+        left: 0;
+        background-color: #111;
+      }
+
+      /* Control the right side */
+      .right {
+        right: 0;
+        background-color: white;
+      }
+
+      /* If you want the content centered horizontally and vertically */
+      .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      /* Style the image inside the centered container, if needed */
+      .centered img {
+        display: block;
+        max-width: 150px;
+        max-height: 150px;
+        width: auto;
+        height: auto;
+      }
+
+      .pad12 {
+        margin: 12px;
+        padding: 12px;
+      }
+
+      .pad12l {
+        padding-left: 12px;
+      }
+
+      .pad12r {
+        padding-right: 12px;
+      }
+
+      .pad12t {
+        padding-top: 12px;
+      }
+
+      .pad12b {
+        padding-bottom: 12px;
+      }
+
+      .floatleft {
+        float: left;
+      }
+
+      .floatright {
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="split left">
+      <div class="centered">
+        <div style="color:white">
+          <h1>
+            Make Rules
+          </h1>
+        </div>
+
+        <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+        <xml id="toolbox" style="display: none">
+          <block type="game_rule"></block>
+          <block type="game_action_move"></block>
+          <block type="game_trigger_click"></block>
+          <block type="game_trigger_keypress"></block>
+        </xml>
+
+        <script>
+          var demoWorkspace = Blockly.inject("blocklyDiv", {
+            media: "../../media/",
+            toolbox: document.getElementById("toolbox")
+          });
+        </script>
+      </div>
+    </div>
+
+    <div class="split right">
+      <div class="centered">
+        <!-- <div style="color:black">
+              <h1>
+                 Play Game
+              </h1>
+            </div> -->
+        <img
+          id="panda"
+          src="../../custom/panda.jpg"
+          alt="Panda"
+          width="100"
+          height="100"
+        />
+      </div>
+    </div>
+  </body>
 </html>
