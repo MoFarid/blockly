@@ -51,6 +51,7 @@
     "unused": true
   },
   "dependencies": {
+    "express": "^4.17.1",
     "jsdom": "^13.2.0"
   }
 }
