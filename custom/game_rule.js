@@ -38,7 +38,7 @@ Blockly.JavaScript["game_rule"] = function(block) {
 
   var code = `{
                 if(triggered['${statements_trigger_1.trim()}'] ${dropdown_operator} triggered['${statements_trigger_2.trim()}']) {
-                  ${value_action.slice(1, -1).trim()}() 
+                  ${value_action.slice(1, -1).trim()}
                   triggered['${statements_trigger_1.trim()}'] = false
                   triggered['${statements_trigger_2.trim()}'] = false
                 }

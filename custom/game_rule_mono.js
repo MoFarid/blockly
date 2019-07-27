@@ -22,7 +22,7 @@ Blockly.Blocks['game_rule_mono'] = {
     var code = `{
         if(triggered['${parsed[0].trim()}']) {
           const actions = () => {
-            ${value_action.slice(1, -1).trim()}() 
+            ${value_action.slice(1, -1).trim()}
             triggered['${parsed[0].trim()}'] = false
           }
           delay(actions, ${parsed[1]})

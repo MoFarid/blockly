@@ -18,7 +18,7 @@ Blockly.Blocks["game_action_move"] = {
 
 Blockly.JavaScript["game_action_move"] = function(block) {
   var dropdown_direction = block.getFieldValue("direction");
-  var code = dropdown_direction+'\n';
+  var code = dropdown_direction+'()';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
