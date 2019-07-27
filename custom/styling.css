@@ -1,0 +1,96 @@
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+
+.centeredLeft {
+  margin-left: 1000px;
+  margin-right: 0px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: #111;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: white;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  display: block;
+  max-width: 150px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+}
+
+.pad12 {
+  margin: 12px;
+  padding: 12px;
+}
+
+.pad12l {
+  padding-left: 12px;
+}
+
+.pad12r {
+  padding-right: 12px;
+}
+
+.pad12t {
+  padding-top: 12px;
+}
+
+.pad12b {
+  padding-bottom: 12px;
+}
+
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
