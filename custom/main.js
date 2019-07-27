@@ -90,7 +90,7 @@ function updateRules () {
   }
 }
 
-function delay (actions, delayValue) {
+function delay(actions, delayValue) {
   setTimeout(actions, 1000 * delayValue)
 }
 
@@ -98,6 +98,12 @@ function runRules () {
   rules.forEach(element => {
     element()
   })
+}
+
+function flagClicked() {
+  const TRIGGER = 'FLAGCLICKED'
+  triggered[TRIGGER] = true
+  runRules()
 }
 
 window.onload = init
