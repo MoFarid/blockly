@@ -144,4 +144,12 @@ async function or (promises) {
   return result
 }
 
+function changeBackground (value) {
+  if (value === 'WHITE') {
+    background.style.backgroundImage = 'none'
+    return
+  }
+  background.style.backgroundImage = `url(../../custom/${value}.jpg)`
+}
+
 window.onload = init

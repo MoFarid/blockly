@@ -16,7 +16,8 @@
     <script src="../../custom/game_trigger_mouseover.js"></script>
     <script src="../../custom/game_action_rotate.js"></script>
     <script src="../../custom/game_trigger_wait.js"></script>
-
+    <script src="../../custom/game_action_changebackground.js"></script>
+    
     <script src="../../custom/main.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../../custom/styling.css" />
@@ -36,22 +37,32 @@
           <block type="game_rule"></block>
           <block type="game_rule_mono"></block>
           <block type="game_trigger_mouseover"></block>
+          <block type="game_action_changebackground"></block>
           <block type="game_action_move"></block>
           <block type="game_action_rotate"></block>
           <block type="game_trigger_clicked"></block>
           <block type="game_trigger_keypress"></block>
           <block type="game_trigger_wait"></block>
         </xml>
-        <!-- <button onclick="playaudio()">Click me!</button> -->
       </div>
     </div>
 
     <div id="pandaspace" class="split right">
-      <button class="but" onclick="flagClicked()"><img src="../../custom/flag.png"></button>
+      <button class="but" onclick="flagClicked()">
+        <img src="../../custom/flag.png" />
+      </button>
+
+      <select onchange="changeBackground(this.value)">
+          <option value="WHITE">White</option>
+          <option value="CLOUD">Cloud</option>
+          <option value="FOREST">Forest</option>
+          <option value="RAIN">Rain</option>
+        </select>
+
       <div class="centered">
         <img
           id="panda"
-          src="../../custom/panda.jpg"
+          src="../../custom/panda.png"
           alt="Panda"
           width="100"
           height="100"
