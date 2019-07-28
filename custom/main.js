@@ -4,7 +4,7 @@ var rules
 var triggered = {}
 var angle = 0
 var demoWorkspace
-const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
 
 function init () {
   imgObj = document.getElementById('panda')
@@ -91,7 +91,7 @@ function updateRules () {
   }
 }
 
-function delay(actions, delayValue) {
+function delay (actions, delayValue) {
   setTimeout(actions, 1000 * delayValue)
 }
 
@@ -101,7 +101,7 @@ function runRules () {
   })
 }
 
-function flagClicked() {
+function flagClicked () {
   const TRIGGER = 'FLAGCLICKED'
   triggered[TRIGGER] = true
   runRules()
@@ -119,6 +119,29 @@ async function checkTrigger (TRIGGER, delay) {
 
 function disableTrigger (TRIGGER) {
   triggered[TRIGGER] = false
+}
+
+async function and (promises) {
+  const values = await Promise.all(promises)
+  for (let i = 0; i < values.length; i++) {
+    if (!values[i]) {
+      return false
+    }
+  }
+  return true
+}
+
+async function or (promises) {
+  let result = false
+  for (let i = 0; i < promises.length; i++) {
+    promises.then(triggerState => {
+      result |= triggerState
+    })
+    if(result) {
+      return result
+    }
+  }
+  return result
 }
 
 window.onload = init
