@@ -12,6 +12,6 @@ Blockly.Blocks['game_trigger_clicked'] = {
 Blockly.JavaScript['game_trigger_clicked'] = function(block) {
   var dropdown_click_type = block.getFieldValue('click_type');
   // TODO: Assemble JavaScript into code variable.
-  var code = dropdown_click_type;
+  var code = `'${dropdown_click_type}'`;
   return code;
 };

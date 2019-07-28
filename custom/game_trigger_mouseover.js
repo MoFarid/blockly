@@ -12,6 +12,6 @@ Blockly.Blocks['game_trigger_mouseover'] = {
 
   Blockly.JavaScript['game_trigger_mouseover'] = function(block) {
     // TODO: Assemble JavaScript into code variable.
-    var code = 'MOUSEOVER';
+    var code = `'MOUSEOVER'`;
     return code;
   };

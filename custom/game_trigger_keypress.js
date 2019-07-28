@@ -13,6 +13,6 @@ Blockly.Blocks['game_trigger_keypress'] = {
   Blockly.JavaScript['game_trigger_keypress'] = function(block) {
     var text_key = block.getFieldValue('key');
     // TODO: Assemble JavaScript into code variable.
-    var code = `${text_key.toLowerCase()}_PRESSED`;
+    var code = `'${text_key.toLowerCase()}_PRESSED'`;
     return code;
   };

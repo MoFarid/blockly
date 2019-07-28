@@ -37,10 +37,10 @@ Blockly.JavaScript["game_rule"] = function(block) {
   // TODO: Assemble JavaScript into code variable.
 
   var code = `{
-                if(triggered['${statements_trigger_1.trim()}'] ${dropdown_operator} triggered['${statements_trigger_2.trim()}']) {
+                if(await checkTrigger(${statements_trigger_1.trim()}) ${dropdown_operator} await checkTrigger(${statements_trigger_2.trim()})){
                   ${value_action.slice(1, -1).trim()}
-                  triggered['${statements_trigger_1.trim()}'] = false
-                  triggered['${statements_trigger_2.trim()}'] = false
+                  disableTrigger(${statements_trigger_1.trim()})
+                  disableTrigger(${statements_trigger_2.trim()})
                 }
               }*&`;
   return code;

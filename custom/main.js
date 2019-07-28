@@ -4,6 +4,7 @@ var rules
 var triggered = {}
 var angle = 0
 var demoWorkspace
+const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor
 
 function init () {
   imgObj = document.getElementById('panda')
@@ -86,7 +87,7 @@ function updateRules () {
   rules.splice(-1, 1)
 
   for (let i = 0; i < rules.length; i++) {
-    rules[i] = new Function(rules[i])
+    rules[i] = new AsyncFunction(rules[i])
   }
 }
 
@@ -104,6 +105,20 @@ function flagClicked() {
   const TRIGGER = 'FLAGCLICKED'
   triggered[TRIGGER] = true
   runRules()
+}
+
+async function wait (ms) {
+  return new Promise((resolve, reject) => setTimeout(resolve, ms))
+}
+
+async function checkTrigger (TRIGGER, delay) {
+  const triggerState = triggered[TRIGGER]
+  await wait(1000 * delay)
+  return triggerState
+}
+
+function disableTrigger (TRIGGER) {
+  triggered[TRIGGER] = false
 }
 
 window.onload = init

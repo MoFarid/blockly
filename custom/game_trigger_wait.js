@@ -18,6 +18,6 @@ Blockly.Blocks['game_trigger_wait'] = {
     var text_wait = block.getFieldValue('WAIT');
     var statements_wait = Blockly.JavaScript.statementToCode(block, 'Wait');
     // TODO: Assemble JavaScript into code variable.
-    var code = `${statements_wait}&+${text_wait}`
+    var code = `${statements_wait.trim()}, ${text_wait}`
     return code;
   }
