@@ -76,7 +76,7 @@ function blink () {
   imgObj.style['animation-iteration-count'] = '1'
 }
 function playaudio () {
-  var audio = new Audio('../../custom/pop.mp3')
+  var audio = new Audio('./custom/pop.mp3')
   audio.play()
 }
 
