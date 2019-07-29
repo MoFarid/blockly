@@ -35,7 +35,7 @@ function init () {
     runRules()
   }
   demoWorkspace = Blockly.inject('blocklyDiv', {
-    media: '../../media/',
+    media: './media/',
     toolbox: document.getElementById('toolbox')
   })
   demoWorkspace.addChangeListener(updateRules)
