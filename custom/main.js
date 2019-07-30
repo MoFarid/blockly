@@ -7,12 +7,22 @@ var demoWorkspace
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
 
 function init () {
-  imgObj = document.getElementById('panda')
-  background = document.getElementById('pandaspace')
+  // Get the modal
+  modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  btn = document.getElementById("myBtn");
+          
+  // Get the <span> element that closes the modal
+  span = document.getElementsByClassName("close")[0];
+
+
+  imgObj = document.getElementById('sprite')
+  background = document.getElementById('spriteSpace')
   imgObj.style.position = 'relative'
   imgObj.style.left = '0px'
   imgObj.style.top = '0px'
-  imgObj.addEventListener('click', function (_e) {
+  imgObj.addEventListener('click', function (e) {
     const TRIGGER = 'CLICKED'
     triggered[TRIGGER] = true
     runRules()
@@ -43,18 +53,31 @@ function init () {
     imgObj.style.animation = null
     imgObj.style['animation-iteration-count'] = null
   })
+
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 
 function moveRight () {
   imgObj.style.left = parseInt(imgObj.style.left) + 10 + 'px'
 }
-function moveLeft () {
+function moveLeft() {
   imgObj.style.left = parseInt(imgObj.style.left) - 10 + 'px'
 }
-function moveUp () {
+function moveUp() {
   imgObj.style.top = parseInt(imgObj.style.top) - 10 + 'px'
 }
-function moveDown () {
+function moveDown() {
   imgObj.style.top = parseInt(imgObj.style.top) + 10 + 'px'
 }
 
@@ -63,15 +86,15 @@ function rotate (degree) {
   imgObj.style.transform = `rotate(${angle}deg)`
 }
 
-function disappear () {
+function disappear() {
   imgObj.style.display = 'none'
 }
 
-function appear () {
+function appear() {
   imgObj.style.display = 'block'
 }
 
-function blink () {
+function blink() {
   imgObj.style.animation = 'blink 0.2s'
   imgObj.style['animation-iteration-count'] = '1'
 }
@@ -87,7 +110,8 @@ function updateRules () {
   rules.splice(-1, 1)
 
   for (let i = 0; i < rules.length; i++) {
-    rules[i] = new AsyncFunction(rules[i])
+    var tmp = rules[i];
+    rules[i] = new AsyncFunction(tmp)
   }
 }
 
@@ -149,7 +173,7 @@ function changeBackground (value) {
     background.style.backgroundImage = 'none'
     return
   }
-  background.style.backgroundImage = `url(../../custom/${value}.jpg)`
+  document.getElementById('top').style.backgroundImage = `url(./custom/${value}.jpg)`
 }
 
 window.onload = init

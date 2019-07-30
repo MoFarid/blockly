@@ -1,7 +1,7 @@
 Blockly.Blocks['game_rule'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Panda");
+        .appendField("");
     this.appendValueInput("action")
         .setCheck(null);
     this.appendStatementInput("trigger_1")

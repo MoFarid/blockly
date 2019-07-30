@@ -1,10 +1,15 @@
 body {
-  background-color: #fff;
+  background-color: black;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
   font-family: sans-serif;
 }
 h1 {
   font-weight: normal;
   font-size: 140%;
+  color: black;
 }
 
 .centeredLeft {
@@ -21,20 +26,22 @@ h1 {
   z-index: 1;
   top: 0;
   overflow-x: hidden;
-  padding-top: 20px;
 }
+
+   /* Control the right side */
+   .right {
+    right: 0;
+    background-color: rgb(196, 184, 184);
+    border-radius: 5px;
+  }
 
 /* Control the left side */
-.left {
-  left: 0;
-  background-color: #111;
-}
-
-/* Control the right side */
-.right {
-  right: 0;
-  background-color: white;
-}
+  .left {
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    margin-right: 2.5px;
+  }
 
 /* If you want the content centered horizontally and vertically */
 .centered {
@@ -116,7 +123,69 @@ h1 {
   color:white;
 }
 
-#pandaspace {
+#spriteSpace {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      height: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    #top {
+      background-color:white;
+      height: 70%;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+
+    #bottom {
+      background-color: gray;
+      height: 30%;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+
+

@@ -1,7 +1,7 @@
 Blockly.Blocks['game_action_rotate'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("Rotate")
+          .appendField("Sprite Rotates")
           .appendField(new Blockly.FieldAngle(90), "angle");
       this.setOutput(true, null);
       this.setColour(135);

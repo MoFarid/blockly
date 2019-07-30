@@ -1,7 +1,7 @@
 Blockly.Blocks['game_trigger_clicked'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["Panda is clicked","CLICKED"], ["Background is clicked","BACKCLICKED"], ["Flag is clicked","FLAGCLICKED"]]), "click_type");
+        .appendField(new Blockly.FieldDropdown([["Sprite is clicked","CLICKED"], ["Background is clicked","BACKCLICKED"], ["Flag is clicked","FLAGCLICKED"]]), "click_type");
     this.setPreviousStatement(true, "Trigger");
     this.setColour(315);
  this.setTooltip("");

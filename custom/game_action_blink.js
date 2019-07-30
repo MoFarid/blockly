@@ -1,7 +1,7 @@
 Blockly.Blocks['game_action_blink'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("panda blinks");
+          .appendField("Sprite blinks");
       this.setOutput(true, null);
       this.setColour(135);
    this.setTooltip("");

@@ -2,10 +2,10 @@ Blockly.Blocks["game_action_move"] = {
   init: function() {
     this.appendDummyInput().appendField(
       new Blockly.FieldDropdown([
-        ["Move Left", "moveLeft"],
-        ["Move Right", "moveRight"],
-        ["Move Up", "moveUp"],
-        ["Move Down", "moveDown"]
+        ["Sprite Moves Left", "moveLeft"],
+        ["Sprite Moves Right", "moveRight"],
+        ["Sprite Moves Up", "moveUp"],
+        ["Sprite Moves Down", "moveDown"]
       ]),
       "direction"
     );

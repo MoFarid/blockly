@@ -1,7 +1,7 @@
 Blockly.Blocks['game_action_audio'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("panda pops");
+          .appendField("Sprite pops");
       this.setOutput(true, null);
       this.setColour(135);
    this.setTooltip("");
