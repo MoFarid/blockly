@@ -12,7 +12,7 @@ Blockly.Blocks['game_action_blink'] = {
 
   Blockly.JavaScript['game_action_blink'] = function(block) {
     // TODO: Assemble JavaScript into code variable.
-    var code = 'blink()';
+    var code = 'blink(Btnindex)';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
   };

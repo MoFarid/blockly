@@ -7,7 +7,7 @@
     <script src="./blocks_compressed.js"></script>
     <script src="./javascript_compressed.js"></script>
     <script src="./msg/js/en.js"></script>
-
+    
     <script src="./custom/game_rule.js"></script>
     <script src="./custom/game_action_move.js"></script>
     <script src="./custom/game_trigger_clicked.js"></script>
@@ -35,22 +35,32 @@
           </h1>
         </div>
 
+        <div id="allscripts">
+        <div id="script0">
         <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 
         <xml id="toolbox" style="display: none">
+          <category name="Rules">
           <block type="game_rule"></block>
           <block type="game_rule_mono"></block>
-          <block type="game_trigger_mouseover"></block>
-          <block type="game_action_changebackground"></block>
-          <block type="game_action_move"></block>
-          <block type="game_action_rotate"></block>
-          <block type="game_trigger_clicked"></block>
-          <block type="game_trigger_keypress"></block>
-          <block type="game_trigger_wait"></block>
+          </category>
+          <category name="Actions">
           <block type="game_action_visibility"></block>
           <block type="game_action_blink"></block>
           <block type="game_action_audio"></block>
+          <block type="game_action_changebackground"></block>
+          <block type="game_action_move"></block>
+          <block type="game_action_rotate"></block>
+          </category>
+          <category name="Triggers">
+          <block type="game_trigger_mouseover"></block>
+          <block type="game_trigger_clicked"></block>
+          <block type="game_trigger_keypress"></block>
+          <block type="game_trigger_wait"></block>
+          </category>
         </xml>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -58,6 +68,8 @@
       <button class="but" onclick="flagClicked()">
         <img src="./custom/flag.png" />
       </button>
+      <button id="myBtn">Add a Sprite</button>
+      <button id="myBtn1">Delete a Sprite</button>
 
       <select onchange="changeBackground(this.value)">
           <option value="WHITE">White</option>
@@ -69,7 +81,7 @@
       <div id="top">
       <div class="centered">
         <img
-          id="sprite"
+          id="sprite0"
           src="./custom/Burger.png"
           alt="Sprite"
           width="100"
@@ -81,19 +93,17 @@
           <h1>
             Sprites
           </h1>
-              <!-- Trigger/Open The Modal -->
-      <button id="myBtn">Choose Sprite</button>
-      <button id="burger" style="height:100px;width:100px"><img src="./custom/Burger-Shrinked.png"></button>
+      <button class="avabtn" id="0" style="height:100px;width:100px" onClick="deleteOrSelect(this.id)"><img src="./custom/Burger-Shrinked.png"></button>
       <!-- The Modal -->
       <div id="myModal" class="modal">
       
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
-          <button id="burger" style="height:100px;width:100px" onclick="resetRules()"><img src="./custom/Burger-Shrinked.png"></button>
-          <button id="racoon" style="height:100px;width:100px" onclick="resetRules()"><img src="./custom/Racoon-Shrinked.png"></button>
-          <button id="sushi" style="height:100px;width:100px" onclick="resetRules()"><img src="./custom/Sushi-Shrinked.png"></button>
-          <button id="turtle" style="height:100px;width:100px" onclick="resetRules()"><img src="./custom/Turtle-Shrinked.png"></button>
+          <button id="burger" style="height:100px;width:100px" onclick="newSprite(this.id)"><img src="./custom/Burger-Shrinked.png"></button>
+          <button id="racoon" style="height:100px;width:100px" onclick="newSprite(this.id)"><img src="./custom/Racoon-Shrinked.png"></button>
+          <button id="sushi" style="height:100px;width:100px" onclick="newSprite(this.id)"><img src="./custom/Sushi-Shrinked.png"></button>
+          <button id="turtle" style="height:100px;width:100px" onclick="newSprite(this.id)"><img src="./custom/Turtle-Shrinked.png"></button>
         </div>
         </div>
       </div>

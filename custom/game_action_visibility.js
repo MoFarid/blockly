@@ -14,7 +14,7 @@ Blockly.Blocks['game_action_visibility'] = {
   Blockly.JavaScript['game_action_visibility'] = function(block) {
     var dropdown_visibility = block.getFieldValue('visibility');
     // TODO: Assemble JavaScript into code variable.
-    var code = dropdown_visibility;
+    var code = dropdown_visibility+'(Btnindex)';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
   };

@@ -1,9 +1,16 @@
-var imgObj = null
+var imgObj = []
 var background
 var rules
 var triggered = {}
 var angle = 0
 var demoWorkspace
+var btns = []
+var scrpts = []
+var counter = 0
+var flag = false;
+var Btnindex = 0;
+var inp;
+var newBtn;
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
 
 function init () {
@@ -16,29 +23,47 @@ function init () {
   // Get the <span> element that closes the modal
   span = document.getElementsByClassName("close")[0];
 
+  btns.push(document.getElementById('0'));
+  imgObj.push(document.getElementById('sprite0'));
+  background = document.getElementById('spriteSpace');
+  scrpts.push(document.getElementById("script0"));
+  inp = btns[0];
 
-  imgObj = document.getElementById('sprite')
-  background = document.getElementById('spriteSpace')
-  imgObj.style.position = 'relative'
-  imgObj.style.left = '0px'
-  imgObj.style.top = '0px'
-  imgObj.addEventListener('click', function (e) {
+  imgObj[0].style.position = 'relative'
+  imgObj[0].style.left = '0px'
+  imgObj[0].style.top = '0px'
+
+  imgObj[0].addEventListener('click', function (e) {
+    console.log(Btnindex+"Click");
+    if(Btnindex == 0){
     const TRIGGER = 'CLICKED'
     triggered[TRIGGER] = true
     runRules()
+    }
   })
+
+  imgObj[0].addEventListener('animationend', function () {
+    imgObj[0].style.animation = null
+    imgObj[0].style['animation-iteration-count'] = null
+  })
+
+  imgObj[0].addEventListener('mouseover', function (e) {
+    if(Btnindex == 0){
+    const TRIGGER = 'MOUSEOVER'
+    triggered[TRIGGER] = true
+    runRules()
+    }
+  })
+
   background.addEventListener('click', function (e) {
     if (e.target !== this) return
     const TRIGGER = 'BACKCLICKED'
     triggered[TRIGGER] = true
     runRules()
   })
-  imgObj.addEventListener('mouseover', function (e) {
-    const TRIGGER = 'MOUSEOVER'
-    triggered[TRIGGER] = true
-    runRules()
-  })
+
   document.onkeypress = function (e) {
+    console.log(Btnindex+"KeyPress");
     e = e || window.event
     const TRIGGER = e.key.toLowerCase() + '_PRESSED'
     triggered[TRIGGER] = true
@@ -49,10 +74,6 @@ function init () {
     toolbox: document.getElementById('toolbox')
   })
   demoWorkspace.addChangeListener(updateRules)
-  imgObj.addEventListener('animationend', function () {
-    imgObj.style.animation = null
-    imgObj.style['animation-iteration-count'] = null
-  })
 
   btn.onclick = function() {
     modal.style.display = "block";
@@ -68,35 +89,37 @@ window.onclick = function(event) {
   }
 }
 
-function moveRight () {
-  imgObj.style.left = parseInt(imgObj.style.left) + 10 + 'px'
+function moveRight (i) {
+  console.log(i);
+  console.log(Btnindex+"MR");
+  imgObj[i].style.left = parseInt(imgObj[i].style.left) + 10 + 'px'
 }
-function moveLeft() {
-  imgObj.style.left = parseInt(imgObj.style.left) - 10 + 'px'
+function moveLeft(i) {
+  imgObj[i].style.left = parseInt(imgObj[i].style.left) - 10 + 'px'
 }
-function moveUp() {
-  imgObj.style.top = parseInt(imgObj.style.top) - 10 + 'px'
+function moveUp(i) {
+  imgObj[i].style.top = parseInt(imgObj[i].style.top) - 10 + 'px'
 }
-function moveDown() {
-  imgObj.style.top = parseInt(imgObj.style.top) + 10 + 'px'
+function moveDown(i) {
+  imgObj[i].style.top = parseInt(imgObj[i].style.top) + 10 + 'px'
 }
 
-function rotate (degree) {
+function rotate (degree,i) {
   angle += degree
-  imgObj.style.transform = `rotate(${angle}deg)`
+  imgObj[i].style.transform = `rotate(${angle}deg)`
 }
 
-function disappear() {
-  imgObj.style.display = 'none'
+function disappear(i) {
+  imgObj[i].style.display = 'none'
 }
 
-function appear() {
-  imgObj.style.display = 'block'
+function appear(i) {
+  imgObj[i].style.display = 'block'
 }
 
-function blink() {
-  imgObj.style.animation = 'blink 0.2s'
-  imgObj.style['animation-iteration-count'] = '1'
+function blink(i) {
+  imgObj[i].style.animation = 'blink 0.2s'
+  imgObj[i].style['animation-iteration-count'] = '1'
 }
 function playaudio () {
   var audio = new Audio('./custom/pop.mp3')
@@ -110,8 +133,7 @@ function updateRules () {
   rules.splice(-1, 1)
 
   for (let i = 0; i < rules.length; i++) {
-    var tmp = rules[i];
-    rules[i] = new AsyncFunction(tmp)
+    rules[i] = new AsyncFunction(rules[i])
   }
 }
 
@@ -123,6 +145,104 @@ function runRules () {
   rules.forEach(element => {
     element()
   })
+}
+
+function newSprite(id){
+
+  modal.style.display = "none";
+  counter++;
+
+  // var block = document.createElement("div");
+  // block.setAttribute("id","script0");
+  // console.log(block);
+  // var script = document.createElement("div");
+  // script.setAttribute("id","script"+counter);
+  // script.appendChild(block);
+  // document.getElementById("allscripts").appendChild(script);
+  // script.style.display = "block";
+  tmp = ""+ counter;
+
+  newBtn = document.createElement("button");
+  newBtn.setAttribute("height", "200");
+  newBtn.setAttribute("width", "200");
+  newBtn.setAttribute("class","avabtn");
+  newBtn.setAttribute("id",tmp);
+  // newBtn.addEventListener('click',deleteOrSelect(newBtn.id));
+  // console.log(newBtn.id)
+  newBtn.setAttribute("onClick","deleteOrSelect(newBtn.id)");
+  var imgNew = document.createElement("img");
+  imgNew.setAttribute("height", "100");
+  imgNew.setAttribute("width", "100");
+  imgNew.setAttribute("id","sprite"+counter);
+
+  if(id==="burger"){
+    imgNew.setAttribute("src","./custom/Burger.png");
+    newBtn.setAttribute("src","./custom/Burger-Shrinked.png");
+  }else if (id==="racoon"){
+    imgNew.setAttribute("src","./custom/Racoon.png");
+    newBtn.setAttribute("src","./custom/Racoon-Shrinked.png");
+  }else if (id==="sushi"){
+    imgNew.setAttribute("src","./custom/Sushi.png");
+    newBtn.setAttribute("src","./custom/Sushi-Shrinked.png");
+  }else if (id==="turtle"){
+    imgNew.setAttribute("src","./custom/Turtle.png");
+    newBtn.setAttribute("src","./custom/Turtle-Shrinked.png");
+  }
+
+  document.getElementById("top").appendChild(imgNew);
+  document.getElementById("bottom").appendChild(newBtn);
+
+  imgNew.style.position = 'relative'
+  imgNew.style.left = '0px'
+  imgNew.style.top = '0px'
+
+  imgNew.addEventListener('click', function (e) {
+    if(imgNew.id.substring(6) == ""+Btnindex){
+    const TRIGGER = 'CLICKED'
+    triggered[TRIGGER] = true
+    runRules()
+    }
+  })
+
+  imgNew.addEventListener('animationend', function () {
+    imgNew.style.animation = null
+    imgNew.style['animation-iteration-count'] = null
+  })
+
+  imgNew.addEventListener('mouseover', function (e) {
+    if(imgNew.id.substring(6) == ""+Btnindex){
+    const TRIGGER = 'MOUSEOVER'
+    triggered[TRIGGER] = true
+    runRules()
+   }
+  })
+
+  imgObj.push(imgNew);
+  btns.push(newBtn);
+
+  // for(j=0;j<btns.length;j++){
+  //   inp = btns[j];
+  //   console.log(inp.id);
+  //   btns[j].addEventListener('click',deleteOrSelect(btns[j].id));
+  // }
+  // scrpts.push(script);
+  // console.log(btns);
+}
+
+function deleteOrSelect(p){
+  console.log(p+"p")
+  if(flag===false){
+    // for(i=0;i<btns.length;i++){
+    //   if(btns[i].id==p){
+    //     Btnindex = i;
+    //     console.log(Btnindex+"select");
+    //     break;
+    //   }
+    // }
+    Btnindex = p;
+  }else{
+    //delete
+  }
 }
 
 function flagClicked () {
