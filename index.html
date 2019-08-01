@@ -70,6 +70,15 @@
       </button>
       <button id="myBtn">Add a Sprite</button>
       <button id="myBtn1">Delete a Sprite</button>
+      <button id="orgCode" onclick="displayCode()">Show Code</button>
+
+      <div id="codeModal" class="modal">
+      
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+          </div>
+          </div>
 
       <select onchange="changeBackground(this.value)">
           <option value="WHITE">White</option>
@@ -93,7 +102,7 @@
           <h1>
             Sprites
           </h1>
-      <button class="avabtn" id="0" style="height:100px;width:100px" onClick="deleteOrSelect(this.id)"><img src="./custom/Burger-Shrinked.png"></button>
+      <button class="avabtn" id='0' style="height:100px;width:100px"><img src="./custom/Burger-Shrinked.png"></button>
       <!-- The Modal -->
       <div id="myModal" class="modal">
       

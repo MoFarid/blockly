@@ -16,6 +16,7 @@ const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
 function init () {
   // Get the modal
   modal = document.getElementById("myModal");
+  codeModal = document.getElementById("codeModal");
 
   // Get the button that opens the modal
   btn = document.getElementById("myBtn");
@@ -24,9 +25,11 @@ function init () {
   span = document.getElementsByClassName("close")[0];
 
   btns.push(document.getElementById('0'));
+
   imgObj.push(document.getElementById('sprite0'));
   background = document.getElementById('spriteSpace');
   scrpts.push(document.getElementById("script0"));
+
   inp = btns[0];
 
   imgObj[0].style.position = 'relative'
@@ -34,11 +37,16 @@ function init () {
   imgObj[0].style.top = '0px'
 
   imgObj[0].addEventListener('click', function (e) {
-    console.log(Btnindex+"Click");
     if(Btnindex == 0){
     const TRIGGER = 'CLICKED'
     triggered[TRIGGER] = true
     runRules()
+    }
+  })
+
+  inp.addEventListener('click',function (e){
+    if(flag===false){
+      Btnindex = inp.id;
     }
   })
 
@@ -63,7 +71,6 @@ function init () {
   })
 
   document.onkeypress = function (e) {
-    console.log(Btnindex+"KeyPress");
     e = e || window.event
     const TRIGGER = e.key.toLowerCase() + '_PRESSED'
     triggered[TRIGGER] = true
@@ -90,8 +97,6 @@ window.onclick = function(event) {
 }
 
 function moveRight (i) {
-  console.log(i);
-  console.log(Btnindex+"MR");
   imgObj[i].style.left = parseInt(imgObj[i].style.left) + 10 + 'px'
 }
 function moveLeft(i) {
@@ -169,7 +174,12 @@ function newSprite(id){
   newBtn.setAttribute("id",tmp);
   // newBtn.addEventListener('click',deleteOrSelect(newBtn.id));
   // console.log(newBtn.id)
-  newBtn.setAttribute("onClick","deleteOrSelect(newBtn.id)");
+  newBtn.addEventListener('click',function (e){
+    if(flag===false){
+      Btnindex = e.target.id;
+    }
+  })
+
   var imgNew = document.createElement("img");
   imgNew.setAttribute("height", "100");
   imgNew.setAttribute("width", "100");
@@ -229,20 +239,9 @@ function newSprite(id){
   // console.log(btns);
 }
 
-function deleteOrSelect(p){
-  console.log(p+"p")
-  if(flag===false){
-    // for(i=0;i<btns.length;i++){
-    //   if(btns[i].id==p){
-    //     Btnindex = i;
-    //     console.log(Btnindex+"select");
-    //     break;
-    //   }
-    // }
-    Btnindex = p;
-  }else{
-    //delete
-  }
+function displayCode(){
+  codeModal.style.display = "block";
+  
 }
 
 function flagClicked () {
